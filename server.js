@@ -3,8 +3,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const PORT = 3003;
-// const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 80
 const public = path.join(__dirname, '/public');
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +19,7 @@ app.get('/api/notes', (req, res) => {
 })
 
 app.post('/api/notes', (req, res) => {
-    let sNote = JSON.parse(fs.writeFileSync("./db/db.json"));
+    let sNote = JSON.parse(fs.readFileSync("./db/db.json"));
     let nNote = req.body;
     let nId = (sNote.length).toString();
     nNote.id = nId;
